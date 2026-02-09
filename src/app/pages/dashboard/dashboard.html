@@ -1,0 +1,89 @@
+<!-- src/app/pages/dashboard/dashboard.component.html -->
+<div class="container my-4">
+
+  <!-- Header with title and logout button -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Wallet Dashboard</h2>
+    <button class="btn btn-outline-danger" (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+  </div>
+
+  <!-- Balance Card -->
+  <div class="card text-center shadow-sm mb-4">
+    <div class="card-body">
+      <img src="assets/wallet.png" alt="Wallet" class="mb-3" style="height: 50px;">
+      <h5 class="card-title">Current Balance</h5>
+      <h2 class="card-text text-success">₹ {{ balance | number:'1.2-2' }}</h2>
+      <button class="btn btn-outline-primary mt-2" (click)="getBalance()">
+        <i class="bi bi-arrow-clockwise"></i> Refresh Balance
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4">
+
+    <!-- Top Up Section -->
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header d-flex align-items-center">
+          <i class="bi bi-plus-circle me-2"></i>
+          Top Up Wallet
+        </div>
+        <div class="card-body">
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="topupAmount">
+            <button class="btn btn-primary" (click)="topUp()">
+              <i class="bi bi-currency-rupee"></i> Top Up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transfer Section -->
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header d-flex align-items-center">
+          <i class="bi bi-arrow-right-circle me-2"></i>
+          Transfer Money
+        </div>
+        <div class="card-body">
+          <input type="text" class="form-control mb-2" placeholder="Receiver ID" [(ngModel)]="receiverId">
+          <input type="number" class="form-control mb-2" placeholder="Amount" [(ngModel)]="transferAmount">
+          <button class="btn btn-success w-100" (click)="transfer()">
+            <i class="bi bi-send-fill"></i> Transfer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction History -->
+  <div class="card mt-4 shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span><i class="bi bi-clock-history me-1"></i> Transaction History</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="loadHistory()">
+        <i class="bi bi-arrow-clockwise"></i> Refresh
+      </button>
+    </div>
+    <ul class="list-group list-group-flush" *ngIf="transactions.length > 0; else noTxns">
+      <li class="list-group-item" *ngFor="let tx of transactions">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>
+            <strong>{{ tx.transactionId }}</strong>
+            - <span [ngClass]="{'text-success': tx.status === 'SUCCESS', 'text-danger': tx.status === 'FAILED'}">
+                {{ tx.status }}
+              </span>
+          </span>
+          <span class="badge bg-primary rounded-pill">₹ {{ tx.amount | number:'1.2-2' }}</span>
+        </div>
+      </li>
+    </ul>
+    <ng-template #noTxns>
+      <div class="card-body text-center text-muted">
+        <i class="bi bi-info-circle me-1"></i>No transactions yet.
+      </div>
+    </ng-template>
+  </div>
+</div>

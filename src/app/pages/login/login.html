@@ -1,0 +1,57 @@
+<!-- src/app/pages/login/login.html -->
+<div class="d-flex justify-content-center align-items-center vh-100 login-bg">
+  <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+    <h2 class="text-center mb-4">Login</h2>
+
+    <form (ngSubmit)="login()">
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="email" 
+          id="email"
+          class="form-control shadow-sm"
+          placeholder="Enter your email"
+          [(ngModel)]="email" 
+          name="email"
+          required
+        >
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="text" 
+          id="password"
+          class="form-control shadow-sm"
+          placeholder="Enter your password"
+          [(ngModel)]="password" 
+          name="password"
+          required
+        >
+      </div>
+
+      <!-- Submit button -->
+      <div class="d-grid mb-3">
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Logging in...' : 'Login' }}
+        </button>
+      </div>
+
+      <!-- Error message -->
+      <p *ngIf="errorMessage" class="text-danger text-center">{{ errorMessage }}</p>
+
+  <!-- Register link -->
+<div class="text-center mt-3">
+  <span class="text-muted">Don't have an account?</span>
+  <a routerLink="/register" class="ms-1 text-decoration-none" style="cursor: pointer;">
+    Register
+  </a>
+</div>
+
+
+    </form>
+  </div>
+</div>

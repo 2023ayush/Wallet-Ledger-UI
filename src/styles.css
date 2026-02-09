@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* src/styles.css */
+
+/* Full-page gradient background for login */
+.login-bg {
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+}
+
+/* Optional: adjust card border radius & shadow for modern look */
+.card {
+  border-radius: 12px;
+}
+
+/* Input and button hover */
+input.form-control {
+  transition: all 0.2s ease-in-out;
+}
+
+input.form-control:focus {
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+  border-color: #2575fc;
+}
+
+/* Eye icon hover effect */
+.btn-outline-secondary:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
